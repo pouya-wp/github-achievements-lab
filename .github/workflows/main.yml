@@ -1,0 +1,22 @@
+name: Badge Hunter
+on:
+  schedule:
+    - cron: "0 */0.1 * * *" # هر ۶ ساعت یکبار اجرا میشه که طبیعی به نظر برسه
+  workflow_dispatch: # دکمه اجرای دستی
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create local changes
+        run: |
+          date > date.txt
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: 
+          commit-message: "Update date for Badge"
+          title: "Achievement Hunt"
+          body: "Automated PR for Pull Shark badge"
+          branch: "badge-hunt"
